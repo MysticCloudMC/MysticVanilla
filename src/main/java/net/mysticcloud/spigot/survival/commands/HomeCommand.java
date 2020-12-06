@@ -3,7 +3,6 @@ package net.mysticcloud.spigot.survival.commands;
 import java.util.List;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,12 +14,12 @@ import net.mysticcloud.spigot.core.utils.CoreUtils;
 import net.mysticcloud.spigot.core.utils.warps.Warp;
 import net.mysticcloud.spigot.core.utils.warps.WarpBuilder;
 import net.mysticcloud.spigot.core.utils.warps.WarpUtils;
-import net.mysticcloud.spigot.survival.MysticSurvival;
+import net.mysticcloud.spigot.survival.MysticVanilla;
 import net.mysticcloud.spigot.survival.utils.HomeUtils;
 
 public class HomeCommand implements CommandExecutor {
 
-	public HomeCommand(MysticSurvival plugin, String... cmd) {
+	public HomeCommand(MysticVanilla plugin, String... cmd) {
 		for (String comd : cmd) {
 			PluginCommand com = plugin.getCommand(comd);
 			com.setExecutor(this);

@@ -1,9 +1,9 @@
-name: MysticSurvival
+name: MysticVanilla
 author: QuickScythe
 version: ALPHA
 description: The MysticCloud Survival plugin.
 api-version: 1.15
-main: net.mysticcloud.spigot.survival.MysticSurvival
+main: net.mysticcloud.spigot.survival.MysticVanilla
 commands:
   home:
     usage: /home [owner|default=you] <name>
@@ -27,20 +27,5 @@ commands:
     aliases: ['removepw','deletepw','rpw','dpw','rempw','delpw']
     usage: /removeplayerwarp <name> [selector]
     description: Remove a Player Warp from the database.
-  mysticsurvival:
-    aliases: ['msurvival','ms']
-    usage: /mysticsurvival <sub-command> [args]
-    description: Remove a Player Warp from the database.
-  menu:
-    usage: /menu
-    description: access your menu. You can access perks, crafting, enhancing, and spell and potion making.
-  perk:
-    aliases: ['perks']
-    description: Perks command lol
-    usage: /perk
-  division:
-    aliases: ['d']
-    description: Division settings.
-    usage: /division
   
   

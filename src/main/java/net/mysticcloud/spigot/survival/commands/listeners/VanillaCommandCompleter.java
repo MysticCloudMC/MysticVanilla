@@ -14,11 +14,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 
-public class SurvivalCommandCompleter implements TabCompleter {
+public class VanillaCommandCompleter implements TabCompleter {
 
 	private Map<String, String[]> subcommands = new HashMap<>();
 
-	public SurvivalCommandCompleter() {
+	public VanillaCommandCompleter() {
 		
 
 		subcommands.put("poll", new String[] { "create", "1", "2", "remove", "regenerate", "reset" });

@@ -2,24 +2,22 @@ package net.mysticcloud.spigot.survival.commands;
 
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.PermissionAttachmentInfo;
 
 import net.mysticcloud.spigot.core.commands.listeners.CommandTabCompleter;
 import net.mysticcloud.spigot.core.utils.CoreUtils;
 import net.mysticcloud.spigot.core.utils.warps.Warp;
 import net.mysticcloud.spigot.core.utils.warps.WarpBuilder;
 import net.mysticcloud.spigot.core.utils.warps.WarpUtils;
-import net.mysticcloud.spigot.survival.MysticSurvival;
+import net.mysticcloud.spigot.survival.MysticVanilla;
 
 public class PlayerWarpCommand implements CommandExecutor {
 
-	public PlayerWarpCommand(MysticSurvival plugin, String... cmd) {
+	public PlayerWarpCommand(MysticVanilla plugin, String... cmd) {
 		for (String comd : cmd) {
 			PluginCommand com = plugin.getCommand(comd);
 			com.setExecutor(this);
