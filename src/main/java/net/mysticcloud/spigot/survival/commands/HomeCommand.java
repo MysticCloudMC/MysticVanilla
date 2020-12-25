@@ -69,7 +69,7 @@ public class HomeCommand implements CommandExecutor {
 					if (owner != null) {
 						List<Warp> ohomes = HomeUtils.getHomes(owner);
 						for (Warp ohome : ohomes) {
-							if (ohome.name().equalsIgnoreCase(home)) {
+							if (ohome.name().equalsIgnoreCase(home) || home.equals("")) {
 								((Player) sender).teleport(ohome.location());
 								sender.sendMessage(CoreUtils.prefixes("homes") + "You have teleported to "
 										+ formatUsername(args[0]) + " home " + ohome.name() + ".");
