@@ -32,12 +32,10 @@ public class HomeCommand implements CommandExecutor {
 		if (sender instanceof Player) {
 			if (cmd.getName().equalsIgnoreCase("home")) {
 				List<Warp> homes = HomeUtils.getHomes(((Player) sender).getUniqueId());
-				if (args.length <= 1 || CoreUtils.LookupUUID(args[0]) == null) {
-					if (args.length == 0) {
-						if (homes.size() == 0) {
-							sender.sendMessage(CoreUtils.prefixes("homes") + "You must set a home first! /sethome");
-							return true;
-						}
+				if (args.length <= 1 && CoreUtils.LookupUUID(args[0]) == null) {
+					if (homes.size() == 0) {
+						sender.sendMessage(CoreUtils.prefixes("homes") + "You must set a home first! /sethome");
+						return true;
 					}
 
 					Warp thome = homes.get(0);
