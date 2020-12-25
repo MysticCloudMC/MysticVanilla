@@ -64,7 +64,7 @@ public class HomeCommand implements CommandExecutor {
 
 				} else {
 					UUID owner = CoreUtils.LookupUUID(args[0]);
-					String home = args[1];
+					String home = args.length >= 2 ? args[1] : "";
 
 					if (owner != null) {
 						List<Warp> ohomes = HomeUtils.getHomes(owner);
