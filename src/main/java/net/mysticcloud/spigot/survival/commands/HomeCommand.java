@@ -68,12 +68,12 @@ public class HomeCommand implements CommandExecutor {
 						List<Warp> ohomes = HomeUtils.getHomes(owner);
 						for (Warp ohome : ohomes) {
 							if (ohome.name().equalsIgnoreCase(home) || home.equals("")) {
-								if(CoreUtils.getMysticPlayer((Player)sender).isFriends(args[2])) {
+								if(CoreUtils.getMysticPlayer((Player)sender).isFriends(UUID.fromString(args[0])) || sender.hasPermission("mysticcloud.admin.homes.override")) {
 									((Player) sender).teleport(ohome.location());
 									sender.sendMessage(CoreUtils.prefixes("homes") + "You have teleported to "
 											+ formatUsername(args[0]) + " home " + ohome.name() + ".");
 								} else {
-									sender.sendMessage(CoreUtils.prefixes("homes") + "You must be friends to go to their home (Usernames are case sensitive).");
+									sender.sendMessage(CoreUtils.prefixes("homes") + "You must be friends to go to their home.");
 								}
 								
 								return true;
