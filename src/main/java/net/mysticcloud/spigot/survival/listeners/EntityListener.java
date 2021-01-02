@@ -66,7 +66,7 @@ public class EntityListener implements Listener {
 					message = message
 							.replaceAll("%x",
 									"&c" + Math.sqrt(Math.pow(e.getEntity().getLocation().getX()
-											- ((Entity) e.getEntity().getMetadata("damager")).getLocation().getX(), 2))
+											- ((Entity) e.getEntity().getMetadata("damager").get(0).value()).getLocation().getX(), 2))
 											+ pre);
 					break;
 				case BLOCK_EXPLOSION:
