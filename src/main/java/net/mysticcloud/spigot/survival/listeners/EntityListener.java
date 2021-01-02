@@ -28,11 +28,12 @@ public class EntityListener implements Listener {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onEntityAttackEntity(EntityDamageByEntityEvent e) {
 		if (e.getEntity() instanceof Player) {
 			Bukkit.broadcastMessage("Damager: " + (e.getDamager() instanceof Projectile ? "Projectile" : "Entity"));
+			if (e.getEntity().hasMetadata("damager"))
+				e.getEntity().removeMetadata("damager", VanillaUtils.getPlugin());
 			e.getEntity().setMetadata("damager",
 					new FixedMetadataValue(VanillaUtils.getPlugin(),
 							(e.getDamager() instanceof Projectile) ? ((Projectile) e.getDamager()).getShooter()
