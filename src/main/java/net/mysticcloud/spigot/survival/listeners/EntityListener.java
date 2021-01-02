@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -27,7 +28,8 @@ public class EntityListener implements Listener {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	@EventHandler
+	
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onEntityAttackEntity(EntityDamageByEntityEvent e) {
 		if (e.getEntity() instanceof Player) {
 			Bukkit.broadcastMessage("Damager: " + (e.getDamager() instanceof Projectile ? "Projectile" : "Entity"));
@@ -38,7 +40,7 @@ public class EntityListener implements Listener {
 		}
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onEntityDamage(EntityDamageEvent e) {
 		if (e.getEntity() instanceof Player) {
 
@@ -76,11 +78,10 @@ public class EntityListener implements Listener {
 					break;
 				case PROJECTILE:
 					message = "You were shot and killed from %x blocks away by &c" + who + pre + "!";
-					message = message.replaceAll("%x",
-							"&c" + ((int) (Math.sqrt(Math.pow(e.getEntity().getLocation().getX()
-									- ((Entity) e.getEntity().getMetadata("damager").get(0).value()).getLocation()
-											.getX(),
-									2)))) + pre);
+					message = message.replaceAll("%x", "&c"
+							+ ((int) (Math.sqrt(Math.pow(en.getLocation().getX() - e.getEntity().getLocation().getX(),
+									2) + Math.pow(en.getLocation().getZ() - e.getEntity().getLocation().getZ(), 2))))
+							+ pre);
 					break;
 				case BLOCK_EXPLOSION:
 				case ENTITY_EXPLOSION:
