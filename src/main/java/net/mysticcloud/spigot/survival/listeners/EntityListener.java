@@ -13,6 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.util.Vector;
 
 import net.mysticcloud.spigot.core.utils.CoreUtils;
 import net.mysticcloud.spigot.core.utils.SpawnReason;
@@ -53,21 +54,54 @@ public class EntityListener implements Listener {
 				((Player) e.getEntity()).getInventory().clear();
 				e.setCancelled(true);
 
-				String message = "You died! Careful!";
+				String pre = "&e";
+				String message = "";
 				Bukkit.broadcastMessage(e.getCause() + "");
 				switch (e.getCause()) {
-				case ENTITY_ATTACK:
-					if (e.getEntity() instanceof Projectile) {
-						message = "You were shot and killed from %x blocks away!";
-						message = message
-								.replaceAll("%x",
-										"" + Math.sqrt(Math.pow(e.getEntity().getLocation().getX()
-												- ((Entity) e.getEntity().getMetadata("damager")).getLocation().getX(),
-												2)));
-					}
+				case PROJECTILE:
+					message = "You were shot and killed from %x blocks away!";
+					message = message
+							.replaceAll("%x",
+									"&c" + Math.sqrt(Math.pow(e.getEntity().getLocation().getX()
+											- ((Entity) e.getEntity().getMetadata("damager")).getLocation().getX(), 2))
+											+ pre);
+					break;
+				case BLOCK_EXPLOSION:
+				case ENTITY_EXPLOSION:
+					message = "You blew up! Watch out for explosives. :)";
+					break;
+				case DROWNING:
+					message = "You drowned. (You don't have gills, in-case you missed the memo)";
+					break;
+				case FIRE:
+				case HOT_FLOOR:
+				case LAVA:
+				case MELTING:
+				case FIRE_TICK:
+					message = "You burned to a crisp!";
+					break;
+				case FALL:
+					message = "You fell to your death from %x blocks up.";
+					message = message.replaceAll("%x", "&c" + ((int) e.getEntity().getFallDistance()) + pre);
+					break;
+				case FLY_INTO_WALL:
+					Vector vel = e.getEntity().getVelocity();
+					message = "You smashed into a wall at %x blocks per second.";
+					message = message.replaceAll("%x",
+							"&c" + Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) + pre);
+					break;
+				case POISON:
+					message = "You were poisoned!";
+					break;
+				case CONTACT:
+				case CRAMMING:
+				case CUSTOM:
+				default:
+					message = "Careful! You died!";
+					break;
 				}
 
-				message = "&e" + message;
+				message = pre + message;
 				e.getEntity().sendMessage(CoreUtils.colorize(message));
 
 				Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
