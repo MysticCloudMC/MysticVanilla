@@ -54,7 +54,7 @@ public class EntityListener implements Listener {
 				e.setCancelled(true);
 
 				String message = "You died! Careful!";
-
+				Bukkit.broadcastMessage(e.getCause() + "");
 				switch (e.getCause()) {
 				case ENTITY_ATTACK:
 					if (e.getEntity() instanceof Projectile) {
