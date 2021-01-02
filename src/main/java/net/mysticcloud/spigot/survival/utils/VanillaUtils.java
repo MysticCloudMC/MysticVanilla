@@ -24,6 +24,7 @@ public class VanillaUtils {
 	public static void start(MysticVanilla main) {
 		plugin = main;
 		CoreUtils.addPrefix("vanilla", "&e&lSurvival &f>&7 ");
+		CoreUtils.addPrefix("rtp", "&e&lRandom Teleport &f>&7 ");
 		CoreUtils.coreHandleDamage(false);
 	}
 

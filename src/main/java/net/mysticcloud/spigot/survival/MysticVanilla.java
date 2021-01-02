@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.mysticcloud.spigot.survival.commands.HomeCommand;
+import net.mysticcloud.spigot.survival.commands.PlayerWarpCommand;
+import net.mysticcloud.spigot.survival.commands.RandomTeleportCommand;
 import net.mysticcloud.spigot.survival.listeners.EntityListener;
 import net.mysticcloud.spigot.survival.listeners.InventoryListener;
 import net.mysticcloud.spigot.survival.listeners.PlayerAttackListener;
@@ -57,13 +59,15 @@ public class MysticVanilla extends JavaPlugin {
 
 		VanillaUtils.start(this);
 		new HomeCommand(this, "home", "sethome", "removehome");
-		new HomeCommand(this, "playerwarp", "addplayerwarp", "removeplayerwarp");
+		new PlayerWarpCommand(this, "playerwarp", "addplayerwarp", "removeplayerwarp");
+		new RandomTeleportCommand(this, "rtp","randomteleport");
 
 		new PlayerListener(this);
 		new PlayerAttackListener(this);
 		new PlayerInteractListener(this);
 		new EntityListener(this);
 		new InventoryListener(this);
+		
 	}
 
 }

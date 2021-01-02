@@ -2,6 +2,8 @@ name: MysticVanilla
 author: QuickScythe
 version: ALPHA
 description: The MysticCloud Survival plugin.
+load: POSTWORLD
+api: Spigot
 api-version: 1.15
 main: net.mysticcloud.spigot.survival.MysticVanilla
 commands:
@@ -27,5 +29,7 @@ commands:
     aliases: ['removepw','deletepw','rpw','dpw','rempw','delpw']
     usage: /removeplayerwarp <name> [selector]
     description: Remove a Player Warp from the database.
-  
-  
+  randomteleport:
+    aliases: ['rtp']
+    usage: /rtp
+    description: Teleport to a random location in the survival world.
