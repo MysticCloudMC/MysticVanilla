@@ -37,7 +37,7 @@ public class PlayerWarpCommand implements CommandExecutor {
 						warps = warps == "" ? warp.name() : warps + ", " + warp.name();
 					sender.sendMessage(warps);
 
-					return false;
+					return true;
 				}
 				String type = "playerwarps";
 				String name = args[0];
@@ -46,7 +46,7 @@ public class PlayerWarpCommand implements CommandExecutor {
 
 				if (warps.size() == 0) {
 					sender.sendMessage(CoreUtils.prefixes("playerwarps") + "Can't find that Player Warp...");
-					return false;
+					return true;
 				}
 
 				if (warps.size() >= 2 && sel == 0) {
@@ -69,7 +69,7 @@ public class PlayerWarpCommand implements CommandExecutor {
 					sender.sendMessage(CoreUtils.prefixes("playerwarps") + "Player Warp (" + name + ") set!");
 				} else {
 					sender.sendMessage(CoreUtils.prefixes("playerwarps") + "There was an error setting the player warp");
-					return false;
+					return true;
 				}
 				
 
@@ -77,6 +77,6 @@ public class PlayerWarpCommand implements CommandExecutor {
 		} else {
 			sender.sendMessage(CoreUtils.prefixes("warps") + "You must be a player to use that command.");
 		}
-		return false;
+		return true;
 	}
 }

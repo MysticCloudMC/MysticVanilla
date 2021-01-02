@@ -53,6 +53,6 @@ public class RandomTeleportCommand implements CommandExecutor {
 		} else {
 			sender.sendMessage(CoreUtils.prefixes("rtp") + "You must be a player to use that command.");
 		}
-		return false;
+		return true;
 	}
 }
