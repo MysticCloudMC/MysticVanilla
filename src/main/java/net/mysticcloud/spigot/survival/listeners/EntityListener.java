@@ -31,7 +31,6 @@ public class EntityListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onEntityAttackEntity(EntityDamageByEntityEvent e) {
 		if (e.getEntity() instanceof Player) {
-			Bukkit.broadcastMessage("Damager: " + (e.getDamager() instanceof Projectile ? "Projectile" : "Entity"));
 			if (e.getEntity().hasMetadata("damager"))
 				e.getEntity().removeMetadata("damager", VanillaUtils.getPlugin());
 			e.getEntity().setMetadata("damager",
@@ -108,9 +107,11 @@ public class EntityListener implements Listener {
 					message = message.replaceAll("%x",
 							"&c" + ((int) (Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) * 10)) + pre);
 					break;
+				case MAGIC:
 				case POISON:
-					message = "You were poisoned by &c" + who + pre + "!";
+					message = "You were put under a spell by &c" + who + pre + "!";
 					break;
+				
 				case CONTACT:
 				case CRAMMING:
 				case CUSTOM:
