@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import net.mysticcloud.spigot.core.utils.CoreUtils;
 import net.mysticcloud.spigot.core.utils.SpawnReason;
@@ -23,10 +25,15 @@ public class EntityListener implements Listener {
 	public EntityListener(MysticVanilla plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
-	
+
 	@EventHandler
 	public void onEntityAttackEntity(EntityDamageByEntityEvent e) {
-		
+		if (e.getEntity() instanceof Player) {
+			e.getEntity().setMetadata("damager",
+					new FixedMetadataValue(VanillaUtils.getPlugin(),
+							(e.getDamager() instanceof Projectile) ? ((Projectile) e.getDamager()).getShooter()
+									: e.getDamager()));
+		}
 	}
 
 	@EventHandler
@@ -45,21 +52,24 @@ public class EntityListener implements Listener {
 				}
 				((Player) e.getEntity()).getInventory().clear();
 				e.setCancelled(true);
-				
+
 				String message = "You died! Careful!";
-				
-//				switch(e.getCause()) {
-//				case ENTITY_ATTACK:
-//					if(e.getEntity() instanceof Arrow) {
-//						message = "You were shot and killed from %x blocks away!";
-//						message = message.replaceAll("%x", Math.sqrt(Math.pow(e.getEntity().getLocation().getX()-e.getD, 2)))
-//					}
-//				}
-				
+
+				switch (e.getCause()) {
+				case ENTITY_ATTACK:
+					if (e.getEntity() instanceof Projectile) {
+						message = "You were shot and killed from %x blocks away!";
+						message = message
+								.replaceAll("%x",
+										"" + Math.sqrt(Math.pow(e.getEntity().getLocation().getX()
+												- ((Entity) e.getEntity().getMetadata("damager")).getLocation().getX(),
+												2)));
+					}
+				}
+
 				message = "&e" + message;
 				e.getEntity().sendMessage(CoreUtils.colorize(message));
-				
-				
+
 				Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
 					public void run() {
 						if (HomeUtils.getHomes(e.getEntity().getUniqueId()).size() > 0) {
