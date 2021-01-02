@@ -72,17 +72,34 @@ public class EntityListener implements Listener {
 					if (!(en instanceof Player))
 						who = "a " + who;
 
+				boolean display = true;
+
 				switch (e.getCause()) {
 				case ENTITY_ATTACK:
-					message = "You were slain by &c" + who + pre + ".";
+					if (en instanceof Player) {
+						display = false;
+						Bukkit.broadcastMessage(
+								CoreUtils.colorize("&c" + e.getEntity().getName() + "&e was killed by &c" + who));
+						break;
+					} else
+						message = "You were slain by &c" + who + pre + ".";
 					break;
 				case PROJECTILE:
-					message = "You were shot and killed from %x blocks away by &c" + who + pre + "!";
-					message = message.replaceAll("%x", "&c"
-							+ ((int) (Math.sqrt(Math.pow(en.getLocation().getX() - e.getEntity().getLocation().getX(),
-									2) + Math.pow(en.getLocation().getZ() - e.getEntity().getLocation().getZ(), 2))))
-							+ pre);
-					break;
+					if (en instanceof Player) {
+						display = false;
+						Bukkit.broadcastMessage(
+								CoreUtils.colorize("&c" + e.getEntity().getName() + "&e was shot by &c" + who));
+						break;
+					} else {
+						message = "You were shot and killed from %x blocks away by &c" + who + pre + "!";
+						message = message.replaceAll("%x", "&c"
+								+ ((int) (Math.sqrt(
+										Math.pow(en.getLocation().getX() - e.getEntity().getLocation().getX(), 2) + Math
+												.pow(en.getLocation().getZ() - e.getEntity().getLocation().getZ(), 2))))
+								+ pre);
+						break;
+					}
+
 				case BLOCK_EXPLOSION:
 				case ENTITY_EXPLOSION:
 					message = "You were exploded by &c" + who + pre + "! Watch out for explosives. :)";
@@ -109,9 +126,15 @@ public class EntityListener implements Listener {
 					break;
 				case MAGIC:
 				case POISON:
-					message = "You were put under a spell by &c" + who + pre + "!";
+					if (en instanceof Player) {
+						display = false;
+						Bukkit.broadcastMessage(
+								CoreUtils.colorize("&c" + e.getEntity().getName() + "&e was put under a spell by &c" + who + pre + "!"));
+						break;
+					} else
+						message = "You were put under a spell by &c" + who + pre + "!";
 					break;
-				
+
 				case CONTACT:
 				case CRAMMING:
 				case CUSTOM:
@@ -121,7 +144,8 @@ public class EntityListener implements Listener {
 				}
 
 				message = pre + message;
-				e.getEntity().sendMessage(CoreUtils.colorize(message));
+				if (display)
+					e.getEntity().sendMessage(CoreUtils.colorize(message));
 
 				Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
 					public void run() {
