@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -20,6 +22,11 @@ public class EntityListener implements Listener {
 
 	public EntityListener(MysticVanilla plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+	}
+	
+	@EventHandler
+	public void onEntityAttackEntity(EntityDamageByEntityEvent e) {
+		
 	}
 
 	@EventHandler
@@ -38,6 +45,21 @@ public class EntityListener implements Listener {
 				}
 				((Player) e.getEntity()).getInventory().clear();
 				e.setCancelled(true);
+				
+				String message = "You died! Careful!";
+				
+//				switch(e.getCause()) {
+//				case ENTITY_ATTACK:
+//					if(e.getEntity() instanceof Arrow) {
+//						message = "You were shot and killed from %x blocks away!";
+//						message = message.replaceAll("%x", Math.sqrt(Math.pow(e.getEntity().getLocation().getX()-e.getD, 2)))
+//					}
+//				}
+				
+				message = "&e" + message;
+				e.getEntity().sendMessage(CoreUtils.colorize(message));
+				
+				
 				Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
 					public void run() {
 						if (HomeUtils.getHomes(e.getEntity().getUniqueId()).size() > 0) {
