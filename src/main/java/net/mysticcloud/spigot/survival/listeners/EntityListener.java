@@ -57,7 +57,7 @@ public class EntityListener implements Listener {
 
 				String pre = "&e";
 				String message = "";
-				Entity en = e.getEntity().hasMetadata("damager")
+				Entity en = (e.getEntity().hasMetadata("damager") && e.getEntity().getMetadata("damager").size() > 0)
 						? (Entity) e.getEntity().getMetadata("damager").get(0).value()
 						: null;
 				String type = (en != null
