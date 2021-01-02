@@ -57,13 +57,18 @@ public class EntityListener implements Listener {
 
 				String pre = "&e";
 				String message = "";
-				Entity en = (Entity) e.getEntity().getMetadata("damager").get(0).value();
-				String type = (en instanceof Player) ? ((Player) en).getName()
-						: en.getType().name().substring(0, 1)
-								+ en.getType().name().substring(1, en.getType().name().length()).toLowerCase();
+				Entity en = e.getEntity().hasMetadata("damager")
+						? (Entity) e.getEntity().getMetadata("damager").get(0).value()
+						: null;
+				String type = (en != null
+						? (en instanceof Player) ? ((Player) en).getName()
+								: en.getType().name().substring(0, 1)
+										+ en.getType().name().substring(1, en.getType().name().length()).toLowerCase()
+						: "");
 				String who = type;
-				if (!(en instanceof Player))
-					who = "a " + who;
+				if (en != null)
+					if (!(en instanceof Player))
+						who = "a " + who;
 
 				switch (e.getCause()) {
 				case ENTITY_ATTACK:
