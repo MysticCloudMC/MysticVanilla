@@ -30,6 +30,7 @@ public class EntityListener implements Listener {
 	@EventHandler
 	public void onEntityAttackEntity(EntityDamageByEntityEvent e) {
 		if (e.getEntity() instanceof Player) {
+			Bukkit.broadcastMessage("Damager: " + (e.getDamager() instanceof Projectile ? "Projectile" : "Entity"));
 			e.getEntity().setMetadata("damager",
 					new FixedMetadataValue(VanillaUtils.getPlugin(),
 							(e.getDamager() instanceof Projectile) ? ((Projectile) e.getDamager()).getShooter()
@@ -58,6 +59,8 @@ public class EntityListener implements Listener {
 				String message = "";
 				Bukkit.broadcastMessage(e.getCause() + "");
 				switch (e.getCause()) {
+				case ENTITY_ATTACK:
+					
 				case PROJECTILE:
 					message = "You were shot and killed from %x blocks away!";
 					message = message
@@ -88,7 +91,7 @@ public class EntityListener implements Listener {
 					Vector vel = e.getEntity().getVelocity();
 					message = "You smashed into a wall at %x blocks per second.";
 					message = message.replaceAll("%x",
-							"&c" + Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) + pre);
+							"&c" + ((int) (Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) * 10)) + pre);
 					break;
 				case POISON:
 					message = "You were poisoned!";
