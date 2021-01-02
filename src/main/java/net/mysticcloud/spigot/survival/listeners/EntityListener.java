@@ -57,21 +57,29 @@ public class EntityListener implements Listener {
 
 				String pre = "&e";
 				String message = "";
-				Bukkit.broadcastMessage(e.getCause() + "");
+				Entity en = (Entity) e.getEntity().getMetadata("damager").get(0).value();
+				String type = (en instanceof Player) ? ((Player) en).getName()
+						: en.getType().name().substring(0, 1)
+								+ en.getType().name().substring(1, en.getType().name().length()).toLowerCase();
+				String who = type;
+				if (!(en instanceof Player))
+					who = "a " + who;
+
 				switch (e.getCause()) {
 				case ENTITY_ATTACK:
-					
+					message = "You were slain by &c" + who + pre + ".";
+					break;
 				case PROJECTILE:
-					message = "You were shot and killed from %x blocks away!";
-					message = message
-							.replaceAll("%x",
-									"&c" + Math.sqrt(Math.pow(e.getEntity().getLocation().getX()
-											- ((Entity) e.getEntity().getMetadata("damager").get(0).value()).getLocation().getX(), 2))
-											+ pre);
+					message = "You were shot and killed from %x blocks away by &c" + who + pre + "!";
+					message = message.replaceAll("%x",
+							"&c" + ((int) (Math.sqrt(Math.pow(e.getEntity().getLocation().getX()
+									- ((Entity) e.getEntity().getMetadata("damager").get(0).value()).getLocation()
+											.getX(),
+									2)))) + pre);
 					break;
 				case BLOCK_EXPLOSION:
 				case ENTITY_EXPLOSION:
-					message = "You blew up! Watch out for explosives. :)";
+					message = "You were exploded by &c" + who + pre + "! Watch out for explosives. :)";
 					break;
 				case DROWNING:
 					message = "You drowned. (You don't have gills, in-case you missed the memo)";
@@ -94,7 +102,7 @@ public class EntityListener implements Listener {
 							"&c" + ((int) (Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) * 10)) + pre);
 					break;
 				case POISON:
-					message = "You were poisoned!";
+					message = "You were poisoned by &c" + who + pre + "!";
 					break;
 				case CONTACT:
 				case CRAMMING:
