@@ -38,8 +38,10 @@ public class RandomTeleportCommand implements CommandExecutor {
 					0, new Random().nextInt(rad)
 							* Math.sin(((new Random().nextInt(circ - 1)) * (circ / 360)) * (180 / Math.PI)));
 
+			sender.sendMessage(CoreUtils.prefixes("vanilla") + "You're being teleported to a random location. Good luck!");
+			
 			TeleportUtils.teleport((Player) sender,
-					loc.getWorld().getHighestBlockAt(loc).getLocation().add(0.5, 2, 0.5));
+					loc.getWorld().getHighestBlockAt(loc).getLocation().add(0.5, 2, 0.5), false);
 
 		} else {
 			sender.sendMessage(CoreUtils.prefixes("rtp") + "You must be a player to use that command.");
