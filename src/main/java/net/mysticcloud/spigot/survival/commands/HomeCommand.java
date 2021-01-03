@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import net.mysticcloud.spigot.core.commands.listeners.CommandTabCompleter;
 import net.mysticcloud.spigot.core.utils.CoreUtils;
+import net.mysticcloud.spigot.core.utils.teleport.TeleportUtils;
 import net.mysticcloud.spigot.core.utils.warps.Warp;
 import net.mysticcloud.spigot.core.utils.warps.WarpBuilder;
 import net.mysticcloud.spigot.core.utils.warps.WarpUtils;
@@ -49,10 +50,10 @@ public class HomeCommand implements CommandExecutor {
 							}
 						}
 					}
-
-					((Player) sender).teleport(thome.location());
+					
+					TeleportUtils.teleport(((Player)sender), thome.location(), false);
 					sender.sendMessage(
-							CoreUtils.prefixes("homes") + "You have teleported to home " + thome.name() + ".");
+							CoreUtils.prefixes("homes") + "Teleporting to home " + thome.name() + ".");
 					if (!choosen) {
 						String s = "";
 						for (Warp home : homes)
