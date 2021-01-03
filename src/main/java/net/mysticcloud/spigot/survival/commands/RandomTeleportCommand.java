@@ -1,5 +1,7 @@
 package net.mysticcloud.spigot.survival.commands;
 
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -39,11 +41,11 @@ public class RandomTeleportCommand implements CommandExecutor {
 							&& ((Player) sender).getLocation().getBlockZ() == loc.getBlockZ()) {
 
 						Location loc2 = new Location(Bukkit.getWorld("survival"),
-								Math.cos(Math.toRadians(CoreUtils.getRandom().nextInt(circ)) * (360 / circ)
-										* (CoreUtils.getRandom().nextInt(rad))),
+								Math.cos(Math.toRadians(new Random().nextInt(circ)) * (360 / circ)
+										* (new Random().nextInt(rad))),
 								0, 
-								Math.sin(Math.toRadians(CoreUtils.getRandom().nextInt(circ)) * (360 / circ)
-										* (CoreUtils.getRandom().nextInt(rad))));
+								Math.sin(Math.toRadians(new Random().nextInt(circ)) * (360 / circ)
+										* (new Random().nextInt(rad))));
 
 						((Player) sender).teleport(loc2.getWorld().getHighestBlockAt(loc2).getLocation().add(0.5, 2, 0.5));
 						sender.sendMessage(CoreUtils.prefixes("rtp")
