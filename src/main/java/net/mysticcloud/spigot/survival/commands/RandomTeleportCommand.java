@@ -12,11 +12,11 @@ import org.bukkit.entity.Player;
 
 import net.mysticcloud.spigot.core.commands.listeners.CommandTabCompleter;
 import net.mysticcloud.spigot.core.utils.CoreUtils;
+import net.mysticcloud.spigot.core.utils.teleport.TeleportUtils;
 import net.mysticcloud.spigot.survival.MysticVanilla;
-import net.mysticcloud.spigot.survival.utils.VanillaUtils;
 
 public class RandomTeleportCommand implements CommandExecutor {
-	
+
 	private int rad = 4000;
 	private int circ = 25132;
 
@@ -31,34 +31,15 @@ public class RandomTeleportCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
-			Location loc = ((Player) sender).getLocation().clone();
-			sender.sendMessage(CoreUtils.prefixes("rtp") + "Don't move. You will teleport in "
-					+ (sender.hasPermission("mysticcloud.teleport.waitoverride") ? 0 : 10) + " seconds.");
-			Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
 
-				@Override
-				public void run() {
-					if (((Player) sender).getLocation().getBlockX() == loc.getBlockX()
-							&& ((Player) sender).getLocation().getBlockZ() == loc.getBlockZ()) {
-						
-						
-								
-						
+			Location loc = new Location(Bukkit.getWorld("survival"),
+					new Random().nextInt(rad)
+							* Math.cos(((new Random().nextInt(circ - 1)) * (circ / 360)) * (180 / Math.PI)),
+					0, new Random().nextInt(rad)
+							* Math.sin(((new Random().nextInt(circ - 1)) * (circ / 360)) * (180 / Math.PI)));
 
-						Location loc2 = new Location(Bukkit.getWorld("survival"),
-								new Random().nextInt(rad) * Math.cos(((new Random().nextInt(circ-1))*(circ/360))*(180/Math.PI)),
-								0, 
-								new Random().nextInt(rad) * Math.sin(((new Random().nextInt(circ-1))*(circ/360))*(180/Math.PI)));
-
-						((Player) sender).teleport(loc2.getWorld().getHighestBlockAt(loc2).getLocation().add(0, 2, 0));
-						sender.sendMessage(CoreUtils.prefixes("rtp")
-								+ "You've been teleported to a random location in the survival world! Good luck! :)");
-					} else {
-						sender.sendMessage(CoreUtils.prefixes("rtp") + "You moved. Teleportation cancelled.");
-					}
-				}
-
-			}, sender.hasPermission("mysticcloud.teleport.waitoverride") ? 0 : 10 * 20);
+			TeleportUtils.teleport((Player) sender,
+					loc.getWorld().getHighestBlockAt(loc).getLocation().add(0.5, 2, 0.5));
 
 		} else {
 			sender.sendMessage(CoreUtils.prefixes("rtp") + "You must be a player to use that command.");
