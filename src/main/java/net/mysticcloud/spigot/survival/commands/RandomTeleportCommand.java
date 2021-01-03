@@ -41,7 +41,7 @@ public class RandomTeleportCommand implements CommandExecutor {
 			sender.sendMessage(CoreUtils.prefixes("vanilla") + "You're being teleported to a random location. Good luck!");
 			
 			TeleportUtils.teleport((Player) sender,
-					loc.getWorld().getHighestBlockAt(loc).getLocation().add(0.5, 2, 0.5), false);
+					loc.getWorld().getHighestBlockAt(loc).getLocation().add(0.5, 2, 0.5), true);
 
 		} else {
 			sender.sendMessage(CoreUtils.prefixes("rtp") + "You must be a player to use that command.");
