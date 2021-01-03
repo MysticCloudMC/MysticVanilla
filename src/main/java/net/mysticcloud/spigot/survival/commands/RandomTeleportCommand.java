@@ -37,11 +37,10 @@ public class RandomTeleportCommand implements CommandExecutor {
 							&& ((Player) sender).getLocation().getBlockZ() == loc.getBlockZ()) {
 
 						Location loc2 = new Location(Bukkit.getWorld("survival"),
-								Math.cos(Math.toRadians(((CoreUtils.getRandom().nextInt(25132)) * (360 / 25132))))
-										* (CoreUtils.getRandom().nextInt(4000)),
-								0, 
-								Math.sin(Math.toRadians(((CoreUtils.getRandom().nextInt(25132)) * (360 / 25132))))
-										* (CoreUtils.getRandom().nextInt(4000)));
+								Math.cos(Math.toRadians(((CoreUtils.getRandom().nextInt(25132)) * (360 / 25132)))
+										* (CoreUtils.getRandom().nextInt(4000))),
+								0, Math.sin(Math.toRadians(((CoreUtils.getRandom().nextInt(25132)) * (360 / 25132)))
+										* (CoreUtils.getRandom().nextInt(4000))));
 
 						((Player) sender).teleport(loc2.getWorld().getHighestBlockAt(loc2).getLocation().add(0, 2, 0));
 						sender.sendMessage(CoreUtils.prefixes("rtp")
