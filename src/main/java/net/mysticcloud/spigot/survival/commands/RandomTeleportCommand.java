@@ -14,7 +14,7 @@ import net.mysticcloud.spigot.survival.MysticVanilla;
 import net.mysticcloud.spigot.survival.utils.VanillaUtils;
 
 public class RandomTeleportCommand implements CommandExecutor {
-	private int circ = 25132;
+	private int circ = 360;
 	private int rad = 4000;
 
 	public RandomTeleportCommand(MysticVanilla plugin, String... cmd) {
