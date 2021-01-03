@@ -14,6 +14,8 @@ import net.mysticcloud.spigot.survival.MysticVanilla;
 import net.mysticcloud.spigot.survival.utils.VanillaUtils;
 
 public class RandomTeleportCommand implements CommandExecutor {
+	private int circ = 25132;
+	private int rad = 4000;
 
 	public RandomTeleportCommand(MysticVanilla plugin, String... cmd) {
 		for (String comd : cmd) {
@@ -37,12 +39,13 @@ public class RandomTeleportCommand implements CommandExecutor {
 							&& ((Player) sender).getLocation().getBlockZ() == loc.getBlockZ()) {
 
 						Location loc2 = new Location(Bukkit.getWorld("survival"),
-								Math.cos(Math.toRadians(((CoreUtils.getRandom().nextInt(25132)) * (360 / 25132)))
-										* (CoreUtils.getRandom().nextInt(4000))),
-								0, Math.sin(Math.toRadians(((CoreUtils.getRandom().nextInt(25132)) * (360 / 25132)))
-										* (CoreUtils.getRandom().nextInt(4000))));
+								Math.cos(Math.toRadians(CoreUtils.getRandom().nextInt(circ)) * (360 / circ)
+										* (CoreUtils.getRandom().nextInt(rad))),
+								0, 
+								Math.sin(Math.toRadians(CoreUtils.getRandom().nextInt(circ)) * (360 / circ)
+										* (CoreUtils.getRandom().nextInt(rad))));
 
-						((Player) sender).teleport(loc2.getWorld().getHighestBlockAt(loc2).getLocation().add(0, 2, 0));
+						((Player) sender).teleport(loc2.getWorld().getHighestBlockAt(loc2).getLocation().add(0.5, 2, 0.5));
 						sender.sendMessage(CoreUtils.prefixes("rtp")
 								+ "You've been teleported to a random location in the survival world! Good luck! :)");
 					} else {
