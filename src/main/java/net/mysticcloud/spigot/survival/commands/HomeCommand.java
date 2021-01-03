@@ -50,16 +50,16 @@ public class HomeCommand implements CommandExecutor {
 							}
 						}
 					}
+
 					
-					TeleportUtils.teleport(((Player)sender), thome.location(), false);
-					sender.sendMessage(
-							CoreUtils.prefixes("homes") + "Teleporting to home " + thome.name() + ".");
+					sender.sendMessage(CoreUtils.prefixes("homes") + "Teleporting to home " + thome.name() + ".");
 					if (!choosen) {
 						String s = "";
 						for (Warp home : homes)
 							s = s == "" ? home.name() : s + ", " + home.name();
 						sender.sendMessage(CoreUtils.prefixes("homes") + "Here's a list of your homes: " + s);
 					}
+					TeleportUtils.teleport(((Player) sender), thome.location(), false);
 
 				} else {
 					UUID owner = CoreUtils.LookupUUID(args[0]);
@@ -71,15 +71,14 @@ public class HomeCommand implements CommandExecutor {
 							if (ohome.name().equalsIgnoreCase(home) || home.equals("")) {
 								if (CoreUtils.getMysticPlayer((Player) sender).isFriends(CoreUtils.LookupUUID(args[0]))
 										|| sender.hasPermission("mysticcloud.admin.homes.override")) {
-									
-									if(sender.hasPermission("mysticcloud.admin.homes.override")) {
-										sender.sendMessage(
-												CoreUtils.prefixes("homes") + "You must be friends to go to their home.");
+
+									if (sender.hasPermission("mysticcloud.admin.homes.override")) {
+										sender.sendMessage(CoreUtils.prefixes("homes")
+												+ "You must be friends to go to their home.");
 										sender.sendMessage(CoreUtils.prefixes("admin") + "Overriding");
 									}
-									
-									
-									TeleportUtils.teleport(((Player)sender), ohome.location(), false);
+
+									TeleportUtils.teleport(((Player) sender), ohome.location(), false);
 									sender.sendMessage(CoreUtils.prefixes("homes") + "You have teleported to "
 											+ formatUsername(args[0]) + " home " + ohome.name() + ".");
 								} else {
