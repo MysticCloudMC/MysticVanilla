@@ -1,5 +1,9 @@
 package net.mysticcloud.spigot.survival.listeners;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,19 +23,32 @@ public class PlayerInteractListener implements Listener {
 	@EventHandler
 	public void onPlayerSleep(PlayerBedEnterEvent e) {
 		boolean timeChange = true;
+		List<UUID> uids = new ArrayList<>();
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			if (!player.getWorld().equals(e.getPlayer().getWorld()))
 				continue;
-			if (!player.isSleeping() && !AFKUtils.isAFK(player))
+			if (!player.isSleeping() && !AFKUtils.isAFK(player)) {
 				if (!player.equals(e.getPlayer())) {
 					timeChange = false;
-					break;
 				}
+			} else {
+				if (!player.equals(e.getPlayer()))
+					uids.add(player.getUniqueId());
+			}
 		}
 		if (timeChange) {
 			Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
 				public void run() {
-					e.getPlayer().getWorld().setTime(0);
+					boolean check2 = true;
+					for (UUID uid : uids) {
+						if (Bukkit.getPlayer(uid) != null) {
+							if (!Bukkit.getPlayer(uid).isSleeping()) {
+								check2 = false;
+							}
+						}
+					}
+					if (check2)
+						e.getPlayer().getWorld().setTime(0);
 				}
 			}, 5 * 20);
 
