@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import net.mysticcloud.spigot.core.utils.CoreUtils;
 import net.mysticcloud.spigot.core.utils.MysticPlayer;
 import net.mysticcloud.spigot.survival.MysticVanilla;
+import net.mysticcloud.spigot.survival.utils.afk.AFKRunnable;
 
 public class VanillaUtils {
 	private static MysticVanilla plugin;
@@ -26,9 +28,11 @@ public class VanillaUtils {
 		CoreUtils.addPrefix("vanilla", "&3&lSurvival &7>&f ");
 		CoreUtils.addPrefix("rtp", "&e&lRandom Teleport &f>&7 ");
 		CoreUtils.coreHandleDamage(false);
+		
+		Bukkit.getScheduler().runTaskLater(plugin, new AFKRunnable(), 5*20);
 	}
 
-	public static MysticVanilla	 getPlugin() {
+	public static MysticVanilla getPlugin() {
 		return plugin;
 	}
 
