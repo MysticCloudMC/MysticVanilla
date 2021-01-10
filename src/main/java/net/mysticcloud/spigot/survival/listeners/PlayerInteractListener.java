@@ -32,8 +32,11 @@ public class PlayerInteractListener implements Listener {
 					timeChange = false;
 				}
 			} else {
-				if (!player.equals(e.getPlayer()))
-					uids.add(player.getUniqueId());
+				if (!player.equals(e.getPlayer())) {
+					if (player.isSleeping() && AFKUtils.isAFK(player))
+						uids.add(player.getUniqueId());
+				}
+
 			}
 		}
 		if (timeChange) {
