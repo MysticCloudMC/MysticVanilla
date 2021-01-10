@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
 import net.mysticcloud.spigot.survival.MysticVanilla;
+import net.mysticcloud.spigot.survival.utils.VanillaUtils;
 import net.mysticcloud.spigot.survival.utils.afk.AFKUtils;
 
 public class PlayerInteractListener implements Listener {
@@ -19,12 +20,20 @@ public class PlayerInteractListener implements Listener {
 	public void onPlayerSleep(PlayerBedEnterEvent e) {
 		boolean timeChange = true;
 		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (!player.isSleeping() && !AFKUtils.isAFK(player))
-				if (!player.equals(e.getPlayer()))
-					timeChange = false;
+			if (!player.getWorld().equals(e.getPlayer().getWorld()) || !player.equals(e.getPlayer()))
+				continue;
+			if (!player.isSleeping() && !AFKUtils.isAFK(player)) {
+				timeChange = false;
+				break;
+			}
 		}
 		if (timeChange) {
-			e.getPlayer().getWorld().setTime(0);
+			Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
+				public void run() {
+					e.getPlayer().getWorld().setTime(0);
+				}
+			}, 5 * 20);
+
 		}
 	}
 

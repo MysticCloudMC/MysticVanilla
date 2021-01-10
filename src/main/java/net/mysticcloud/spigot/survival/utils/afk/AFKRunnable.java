@@ -48,7 +48,7 @@ public class AFKRunnable implements Runnable {
 			locs.remove(uid);
 		}
 		
-		Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new AFKRunnable(locs), 5*20);
+		Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new AFKRunnable(locs), 5*20*60);
 	}
 
 }
