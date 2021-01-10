@@ -20,4 +20,12 @@ public class AFKPacket {
 		return afk;
 	}
 
+	public Location getLocation() {
+		return loc;
+	}
+
+	public UUID getUUID() {
+		return uid;
+	}
+
 }

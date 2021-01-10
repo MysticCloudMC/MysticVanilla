@@ -24,4 +24,8 @@ public class AFKUtils {
 		return afkers.containsKey(player.getUniqueId()) ? afkers.get(player.getUniqueId()).isAFK() : false;
 	}
 
+	public static AFKPacket getAFKPacket(Player player) {
+		return afkers.containsKey(player.getUniqueId()) ? afkers.get(player.getUniqueId()) : null;
+	}
+
 }

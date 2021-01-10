@@ -14,11 +14,17 @@ public class PlayerListener implements Listener {
 	public PlayerListener(MysticVanilla plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
-	
+
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent e) {
-		if(AFKUtils.isAFK(e.getPlayer())) {
-			AFKUtils.afk(e.getPlayer(), false);
+		if (AFKUtils.isAFK(e.getPlayer())) {
+			if (!(AFKUtils.getAFKPacket(e.getPlayer()) == null)) {
+				if (!AFKUtils.getAFKPacket(e.getPlayer()).getLocation().getBlock().getLocation()
+						.equals(e.getPlayer().getLocation().getBlock().getLocation())) {
+					AFKUtils.afk(e.getPlayer(), false);
+				}
+			}
+
 		}
 	}
 
