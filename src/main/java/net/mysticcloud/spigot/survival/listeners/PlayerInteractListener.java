@@ -20,7 +20,8 @@ public class PlayerInteractListener implements Listener {
 		boolean timeChange = true;
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			if (!player.isSleeping() && !AFKUtils.isAFK(player))
-				timeChange = false;
+				if (!player.equals(e.getPlayer()))
+					timeChange = false;
 		}
 		if (timeChange) {
 			e.getPlayer().getWorld().setTime(0);
