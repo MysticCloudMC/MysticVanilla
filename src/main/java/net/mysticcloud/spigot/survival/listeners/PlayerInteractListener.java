@@ -20,12 +20,13 @@ public class PlayerInteractListener implements Listener {
 	public void onPlayerSleep(PlayerBedEnterEvent e) {
 		boolean timeChange = true;
 		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (!player.getWorld().equals(e.getPlayer().getWorld()) || !player.equals(e.getPlayer()))
+			if (!player.getWorld().equals(e.getPlayer().getWorld()))
 				continue;
-			if (!player.isSleeping() && !AFKUtils.isAFK(player)) {
-				timeChange = false;
-				break;
-			}
+			if (!player.isSleeping() && !AFKUtils.isAFK(player))
+				if (!player.equals(e.getPlayer())) {
+					timeChange = false;
+					break;
+				}
 		}
 		if (timeChange) {
 			Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
