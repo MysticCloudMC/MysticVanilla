@@ -32,7 +32,7 @@ public class PlayerInteractListener implements Listener {
 					timeChange = false;
 				}
 			} else {
-				if (player.isSleeping() && AFKUtils.isAFK(player))
+				if (player.isSleeping() && !AFKUtils.isAFK(player))
 					uids.add(player.getUniqueId());
 
 			}
