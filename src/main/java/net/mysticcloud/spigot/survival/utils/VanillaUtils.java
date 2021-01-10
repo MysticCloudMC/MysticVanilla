@@ -27,7 +27,7 @@ public class VanillaUtils {
 		plugin = main;
 		CoreUtils.addPrefix("vanilla", "&3&lSurvival &7>&f ");
 		CoreUtils.addPrefix("rtp", "&e&lRandom Teleport &f>&7 ");
-		CoreUtils.addPrefix("afk", "&a&lAFL &f>&7 ");
+		CoreUtils.addPrefix("afk", "&a&lAFK &f>&7 ");
 		CoreUtils.coreHandleDamage(false);
 
 		Bukkit.getScheduler().runTaskLater(plugin, new AFKRunnable(), 5 * 20);
