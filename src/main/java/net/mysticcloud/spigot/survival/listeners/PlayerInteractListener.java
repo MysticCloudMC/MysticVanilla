@@ -10,9 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
+import net.mysticcloud.spigot.core.utils.afk.AFKUtils;
 import net.mysticcloud.spigot.survival.MysticVanilla;
 import net.mysticcloud.spigot.survival.utils.VanillaUtils;
-import net.mysticcloud.spigot.survival.utils.afk.AFKUtils;
 
 public class PlayerInteractListener implements Listener {
 

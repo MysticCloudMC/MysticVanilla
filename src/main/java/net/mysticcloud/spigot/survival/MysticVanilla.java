@@ -9,7 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.mysticcloud.spigot.survival.commands.AFKCommand;
+import net.mysticcloud.spigot.core.commands.AFKCommand;
 import net.mysticcloud.spigot.survival.commands.HomeCommand;
 import net.mysticcloud.spigot.survival.commands.PlayerWarpCommand;
 import net.mysticcloud.spigot.survival.commands.RandomTeleportCommand;
@@ -49,7 +49,7 @@ public class MysticVanilla extends JavaPlugin {
 				@Override
 				public void run() {
 					onEnable();
-				}
+ 				}
 
 			}, 20 * 3);
 			return;
@@ -62,7 +62,6 @@ public class MysticVanilla extends JavaPlugin {
 		new HomeCommand(this, "home", "sethome", "removehome");
 		new PlayerWarpCommand(this, "playerwarp", "addplayerwarp", "removeplayerwarp");
 		new RandomTeleportCommand(this, "rtp","randomteleport");
-		new AFKCommand(this, "afk");
 
 		new PlayerListener(this);
 		new PlayerAttackListener(this);

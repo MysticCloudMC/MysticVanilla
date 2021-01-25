@@ -5,9 +5,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import net.mysticcloud.spigot.core.utils.afk.AFKUtils;
 import net.mysticcloud.spigot.survival.MysticVanilla;
 import net.mysticcloud.spigot.survival.utils.VanillaUtils;
-import net.mysticcloud.spigot.survival.utils.afk.AFKUtils;
 
 public class PlayerListener implements Listener {
 

@@ -21,12 +21,26 @@
 			<arg line="-c 'sudo -u root cp target/${project.projectname}.jar /home/Minecraft/multicraft/jar/spigot.jar.plugins/${project.projectname}.jar'" />
 		</exec>
 		<!--<jar destfile="/home/Minecraft/multicraft/jar/spigot.jar.plugins/${project.projectname}.jar">
-			<fileset dir="${basedir}">
-				<include name="*/*.yml" />
-			</fileset>
-			<fileset dir="${basedir}\bin">
-				<include name="**" />
-			</fileset>
-		</jar>-->
+				<fileset dir="${basedir}">
+					<include name="*/*.yml" />
+				</fileset>
+				<fileset dir="${basedir}\bin">
+					<include name="**" />
+				</fileset>
+			</jar>-->
+	</target>
+
+	<target name="createjar2" description="Create a jar for the in-dev project" depends="mvn">
+		<exec dir="." executable="sh">
+			<arg line="-c 'cp target/${project.projectname}.jar /home/Minecraft/Servers/Test/plugins/${project.projectname}.jar'" />
+		</exec>
+		<!--<jar destfile="/home/Minecraft/multicraft/jar/spigot.jar.plugins/${project.projectname}.jar">
+				<fileset dir="${basedir}">
+					<include name="*/*.yml" />
+				</fileset>
+				<fileset dir="${basedir}\bin">
+					<include name="**" />
+				</fileset>
+			</jar>-->
 	</target>
 </project>

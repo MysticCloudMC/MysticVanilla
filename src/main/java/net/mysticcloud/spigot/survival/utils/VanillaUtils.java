@@ -11,8 +11,8 @@ import org.bukkit.inventory.Inventory;
 
 import net.mysticcloud.spigot.core.utils.CoreUtils;
 import net.mysticcloud.spigot.core.utils.MysticPlayer;
+import net.mysticcloud.spigot.core.utils.afk.AFKRunnable;
 import net.mysticcloud.spigot.survival.MysticVanilla;
-import net.mysticcloud.spigot.survival.utils.afk.AFKRunnable;
 
 public class VanillaUtils {
 	private static MysticVanilla plugin;

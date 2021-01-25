@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-
 import net.mysticcloud.spigot.core.utils.warps.Warp;
 import net.mysticcloud.spigot.core.utils.warps.WarpUtils;
 
