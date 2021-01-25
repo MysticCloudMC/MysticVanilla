@@ -57,7 +57,8 @@ public class EntityListener implements Listener {
 				((Player) e.getEntity()).getInventory().clear();
 				e.setCancelled(true);
 
-				String pre = "&e";
+				String pre = "&7";
+				String pl = "&3";
 				String message = "";
 				Entity en = (e.getEntity().hasMetadata("damager") && e.getEntity().getMetadata("damager").size() > 0)
 						? (Entity) e.getEntity().getMetadata("damager").get(0).value()
@@ -78,21 +79,21 @@ public class EntityListener implements Listener {
 				case ENTITY_ATTACK:
 					if (en instanceof Player) {
 						display = false;
-						Bukkit.broadcastMessage(
-								CoreUtils.colorize("&c" + e.getEntity().getName() + "&e was killed by &c" + who));
+						Bukkit.broadcastMessage(CoreUtils
+								.colorize(pl + e.getEntity().getName() + "&7 was killed by &3" + who + pre + "."));
 						break;
 					} else
-						message = "You were slain by &c" + who + pre + ".";
+						message = pre + "You were slain by " + pl + who + pre + ".";
 					break;
 				case PROJECTILE:
 					if (en instanceof Player) {
 						display = false;
 						Bukkit.broadcastMessage(
-								CoreUtils.colorize("&c" + e.getEntity().getName() + "&e was shot by &c" + who));
+								CoreUtils.colorize(pl + e.getEntity().getName() + pre + " was shot by " + pl + who));
 						break;
 					} else {
-						message = "You were shot and killed from %x blocks away by &c" + who + pre + "!";
-						message = message.replaceAll("%x", "&c"
+						message = pre + "You were shot and killed from %x blocks away by &c" + who + pre + "!";
+						message = message.replaceAll("%x", pl
 								+ ((int) (Math.sqrt(
 										Math.pow(en.getLocation().getX() - e.getEntity().getLocation().getX(), 2) + Math
 												.pow(en.getLocation().getZ() - e.getEntity().getLocation().getZ(), 2))))
@@ -102,44 +103,44 @@ public class EntityListener implements Listener {
 
 				case BLOCK_EXPLOSION:
 				case ENTITY_EXPLOSION:
-					message = "You were exploded by &c" + who + pre + "! Watch out for explosives. :)";
+					message = pre + "You were exploded by " + pl + who + pre + "! Watch out for explosives. :)";
 					break;
 				case DROWNING:
-					message = "You drowned. (You don't have gills, in-case you missed the memo)";
+					message = pre + "You drowned. (You don't have gills, in-case you missed the memo)";
 					break;
 				case FIRE:
 				case HOT_FLOOR:
 				case LAVA:
 				case MELTING:
 				case FIRE_TICK:
-					message = "You burned to a crisp!";
+					message = pre + "You burned to a crisp!";
 					break;
 				case FALL:
-					message = "You fell to your death from %x blocks up.";
-					message = message.replaceAll("%x", "&c" + ((int) e.getEntity().getFallDistance()) + pre);
+					message = pre + "You fell to your death from %x blocks up.";
+					message = message.replaceAll("%x", pl + ((int) e.getEntity().getFallDistance()) + pre);
 					break;
 				case FLY_INTO_WALL:
 					Vector vel = e.getEntity().getVelocity();
-					message = "You smashed into a wall at %x blocks per second.";
+					message = pre + "You smashed into a wall at %x blocks per second.";
 					message = message.replaceAll("%x",
-							"&c" + ((int) (Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) * 10)) + pre);
+							pl + ((int) (Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) * 10)) + pre);
 					break;
 				case MAGIC:
 				case POISON:
 					if (en instanceof Player) {
 						display = false;
-						Bukkit.broadcastMessage(
-								CoreUtils.colorize("&c" + e.getEntity().getName() + "&e was put under a spell by &c" + who + pre + "!"));
+						Bukkit.broadcastMessage(CoreUtils.colorize(pl + e.getEntity().getName() + pre
+								+ " was put under a spell by " + pl + who + pre + "!"));
 						break;
 					} else
-						message = "You were put under a spell by &c" + who + pre + "!";
+						message = pre + "You were put under a spell by &c" + who + pre + "!";
 					break;
 
 				case CONTACT:
 				case CRAMMING:
 				case CUSTOM:
 				default:
-					message = "Careful! You died!";
+					message = pre + "Careful! You died!";
 					break;
 				}
 
