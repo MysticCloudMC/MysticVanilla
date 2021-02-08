@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
 
+import net.mysticcloud.spigot.combatlogger.utils.CombatUtils;
 import net.mysticcloud.spigot.core.utils.CoreUtils;
 import net.mysticcloud.spigot.core.utils.SpawnReason;
 import net.mysticcloud.spigot.survival.MysticVanilla;
@@ -147,6 +148,8 @@ public class EntityListener implements Listener {
 				message = pre + message;
 				if (display)
 					e.getEntity().sendMessage(CoreUtils.colorize(message));
+
+				CombatUtils.removeFromCombat(e.getEntity().getUniqueId());
 
 				Bukkit.getScheduler().runTaskLater(VanillaUtils.getPlugin(), new Runnable() {
 					public void run() {

@@ -20,6 +20,13 @@
 			<systemPath>${dep.dir}/MysticCore.jar</systemPath>
 		</dependency>
 		<dependency>
+			<groupId>net.mysticcloud</groupId>
+			<artifactId>mystic-combat-logger</artifactId>
+			<version>0.5</version>
+			<scope>system</scope>
+			<systemPath>${dep.dir}/MysticCombatLogger.jar</systemPath>
+		</dependency>
+		<dependency>
 			<groupId>net.minecraft</groupId>
 			<artifactId>server</artifactId>
 			<version>1.15.1</version>
