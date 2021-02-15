@@ -33,6 +33,3 @@ commands:
     aliases: ['rtp']
     usage: /rtp
     description: Teleport to a random location in the survival world.
-  afk:
-    usage: /afk [player]
-    description: Toggle yourself or another player as Away From Keyboard (AFK).
