@@ -114,7 +114,7 @@ public class EntityListener implements Listener {
 				case FALL:
 					message = pl + e.getEntity().getName() + pre + " fell to their death from %x blocks up.";
 					message = message.replaceAll("%x", pl + ((int) e.getEntity().getFallDistance()) + pre);
-					Bukkit.broadcastMessage(message);
+					Bukkit.broadcastMessage(CoreUtils.colorize(message));
 					display = false;
 					break;
 				case FLY_INTO_WALL:
@@ -122,6 +122,8 @@ public class EntityListener implements Listener {
 					message = pl + e.getEntity().getName() + pre + " smashed into a wall at %x blocks per second.";
 					message = message.replaceAll("%x",
 							pl + ((int) (Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) * 10)) + pre);
+					Bukkit.broadcastMessage(CoreUtils.colorize(message));
+					display = false;
 					break;
 				case MAGIC:
 				case POISON:
