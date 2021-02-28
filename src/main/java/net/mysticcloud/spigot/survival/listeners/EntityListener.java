@@ -78,35 +78,28 @@ public class EntityListener implements Listener {
 
 				switch (e.getCause()) {
 				case ENTITY_ATTACK:
-					if (en instanceof Player) {
-						display = false;
-						Bukkit.broadcastMessage(CoreUtils
-								.colorize(pl + e.getEntity().getName() + "&7 was killed by &3" + who + pre + "."));
-						break;
-					} else
-						message = pre + "You were slain by " + pl + who + pre + ".";
+					display = false;
+					Bukkit.broadcastMessage(CoreUtils
+							.colorize(pl + e.getEntity().getName() + pre + " was slain by " + pl + who + pre + "."));
 					break;
 				case PROJECTILE:
-					if (en instanceof Player) {
-						display = false;
-						Bukkit.broadcastMessage(
-								CoreUtils.colorize(pl + e.getEntity().getName() + pre + " was shot by " + pl + who));
-						break;
-					} else {
-						message = pre + "You were shot and killed from %x blocks away by &c" + who + pre + "!";
-						message = message.replaceAll("%x", pl
-								+ ((int) (Math.sqrt(
-										Math.pow(en.getLocation().getX() - e.getEntity().getLocation().getX(), 2) + Math
-												.pow(en.getLocation().getZ() - e.getEntity().getLocation().getZ(), 2))))
-								+ pre);
-						break;
-					}
+					message = pl + e.getEntity().getName() + pre + " was shot and killed from %x blocks away by &c"
+							+ who + pre + "!";
+					message = message.replaceAll("%x", pl
+							+ ((int) (Math.sqrt(Math.pow(en.getLocation().getX() - e.getEntity().getLocation().getX(),
+									2) + Math.pow(en.getLocation().getZ() - e.getEntity().getLocation().getZ(), 2))))
+							+ pre);
+					Bukkit.broadcastMessage(CoreUtils.colorize(message));
+					display = false;
+					break;
 
 				case BLOCK_EXPLOSION:
 				case ENTITY_EXPLOSION:
+					Bukkit.broadcastMessage(CoreUtils.colorize(pl + e.getEntity().getName() + pre + " blew up!"));
 					message = pre + "You were exploded by " + pl + who + pre + "! Watch out for explosives. :)";
 					break;
 				case DROWNING:
+					Bukkit.broadcastMessage(CoreUtils.colorize(pl + e.getEntity().getName() + pre + " drowned."));
 					message = pre + "You drowned. (You don't have gills, in-case you missed the memo)";
 					break;
 				case FIRE:
@@ -114,27 +107,27 @@ public class EntityListener implements Listener {
 				case LAVA:
 				case MELTING:
 				case FIRE_TICK:
-					message = pre + "You burned to a crisp!";
+					display = false;
+					Bukkit.broadcastMessage(
+							CoreUtils.colorize(pl + e.getEntity().getName() + pre + " burned to a crisp."));
 					break;
 				case FALL:
-					message = pre + "You fell to your death from %x blocks up.";
+					message = pl + e.getEntity().getName() + pre + " fell to their death from %x blocks up.";
 					message = message.replaceAll("%x", pl + ((int) e.getEntity().getFallDistance()) + pre);
+					Bukkit.broadcastMessage(message);
+					display = false;
 					break;
 				case FLY_INTO_WALL:
 					Vector vel = e.getEntity().getVelocity();
-					message = pre + "You smashed into a wall at %x blocks per second.";
+					message = pl + e.getEntity().getName() + pre + " smashed into a wall at %x blocks per second.";
 					message = message.replaceAll("%x",
 							pl + ((int) (Math.sqrt(Math.pow(vel.getX(), 2) + Math.pow(vel.getY(), 2)) * 10)) + pre);
 					break;
 				case MAGIC:
 				case POISON:
-					if (en instanceof Player) {
-						display = false;
-						Bukkit.broadcastMessage(CoreUtils.colorize(pl + e.getEntity().getName() + pre
-								+ " was put under a spell by " + pl + who + pre + "!"));
-						break;
-					} else
-						message = pre + "You were put under a spell by &c" + who + pre + "!";
+					display = false;
+					Bukkit.broadcastMessage(CoreUtils.colorize(
+							pl + e.getEntity().getName() + pre + " was put under a spell by " + pl + who + pre + "!"));
 					break;
 
 				case CONTACT:

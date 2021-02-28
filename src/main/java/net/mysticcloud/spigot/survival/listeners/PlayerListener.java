@@ -15,18 +15,6 @@ public class PlayerListener implements Listener {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent e) {
-		if (AFKUtils.isAFK(e.getPlayer())) {
-			if (!(AFKUtils.getAFKPacket(e.getPlayer()) == null)) {
-				if (!AFKUtils.getAFKPacket(e.getPlayer()).getLocation().getBlock().getLocation()
-						.equals(e.getPlayer().getLocation().getBlock().getLocation())) {
-					AFKUtils.afk(e.getPlayer(), false);
-				}
-			}
-
-		}
-	}
 
 	@EventHandler
 	public void onPlayerLeave(PlayerQuitEvent e) {
