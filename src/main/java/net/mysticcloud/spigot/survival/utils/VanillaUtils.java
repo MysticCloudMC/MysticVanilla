@@ -10,7 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import net.mysticcloud.spigot.core.utils.CoreUtils;
-import net.mysticcloud.spigot.core.utils.MysticPlayer;
+import net.mysticcloud.spigot.core.utils.accounts.MysticAccountManager;
+import net.mysticcloud.spigot.core.utils.accounts.MysticPlayer;
 import net.mysticcloud.spigot.core.utils.afk.AFKRunnable;
 import net.mysticcloud.spigot.survival.MysticVanilla;
 
@@ -37,11 +38,11 @@ public class VanillaUtils {
 	}
 
 	public static VanillaPlayer getVanillaPlayer(UUID uid) {
-		return getVanillaPlayer(CoreUtils.getMysticPlayer(uid));
+		return getVanillaPlayer(MysticAccountManager.getMysticPlayer(uid));
 	}
 
 	public static VanillaPlayer getVanillaPlayer(Player player) {
-		return getVanillaPlayer(CoreUtils.getMysticPlayer(player));
+		return getVanillaPlayer(MysticAccountManager.getMysticPlayer(player));
 	}
 
 	public static String formatMessage(String message, String... values) {
