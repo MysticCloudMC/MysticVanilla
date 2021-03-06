@@ -48,7 +48,7 @@ public class HomeCommand implements CommandExecutor {
 					TeleportUtils.teleport(((Player) sender), home.location(), false, false);
 
 					sender.sendMessage(CoreUtils.prefixes("homes") + CoreUtils
-							.colorize(VanillaUtils.formatMessage("You have teleported to home &7?&f.", home.name())));
+							.colorize(VanillaUtils.formatMessage("You have teleported to home &7@&f.", home.name())));
 					if (args.length == 0 && HomeUtils.getHomes(((Player) sender).getUniqueId()).size() >= 2) {
 						String s = "";
 						for (Warp homestr : homes)

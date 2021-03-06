@@ -47,8 +47,8 @@ public class VanillaUtils {
 	public static String formatMessage(String message, String... values) {
 		int i = 0;
 		String string = message;
-		while (string.contains("?")) {
-			string = string.replaceFirst("?", values[i]);
+		while (string.contains("@")) {
+			string = string.replaceFirst("@", values[i]);
 			i = i + 1;
 		}
 		return string;
