@@ -52,8 +52,9 @@ public class HomeCommand implements CommandExecutor {
 					if (args.length == 0 && HomeUtils.getHomes(((Player) sender).getUniqueId()).size() >= 2) {
 						String s = "";
 						for (Warp homestr : homes)
-							s = s == "" ? homestr.name() : s + ", " + homestr.name();
-						sender.sendMessage(CoreUtils.prefixes("homes") + "Here's a list of your homes: " + s);
+							s = s == "" ? "&7" + homestr.name() + "&f" : s + ", &7" + homestr.name() + "&f";
+						sender.sendMessage(
+								CoreUtils.prefixes("homes") + "Here's a list of your homes: " + CoreUtils.colorize(s));
 					}
 
 				} else {
