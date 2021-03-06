@@ -8,7 +8,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/home/Minecraft/Dependencies/spigot.jar"/>
-	<classpathentry kind="lib" path="C:/home/Minecraft/Dependencies/MysticCore.jar" sourcepath="/MysticCore"/>
 	<classpathentry kind="lib" path="C:/home/Minecraft/Dependencies/MysticCombatLogger.jar"/>
+	<classpathentry kind="lib" path="C:/home/Minecraft/Dependencies/MysticCore.jar" sourcepath="/MysticCore"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

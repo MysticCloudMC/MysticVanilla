@@ -66,7 +66,7 @@ public class HomeCommand implements CommandExecutor {
 							if (ohome.name().equalsIgnoreCase(home)) {
 								((Player) sender).teleport(ohome.location());
 								sender.sendMessage(CoreUtils.prefixes("homes")
-										+ VanillaUtils.formatMessage("You have teleported to &7?&f home &7?&f.",
+										+ VanillaUtils.formatMessage("You have teleported to &7@&f home &7@&f.",
 												formatUsername(args[0]), ohome.name()));
 								return true;
 							}
@@ -80,15 +80,8 @@ public class HomeCommand implements CommandExecutor {
 
 			if (cmd.getName().equalsIgnoreCase("sethome")) {
 				if (sender instanceof Player) {
-					String name = args.length > 0 ? args[0]
-							: (HomeUtils.getHomes(((Player) sender).getUniqueId()).size() + 1) + "";
-					WarpBuilder warp = new WarpBuilder();
-					if (warp.createWarp().setType("home~" + ((Player) sender).getUniqueId()).setName(name)
-							.setLocation(((Player) sender).getLocation()).getWarp() != null)
-						sender.sendMessage(CoreUtils.prefixes("homes") + "Home '" + name + "' set!");
-					else
-						sender.sendMessage(CoreUtils.prefixes("homes") + "There was an error setting you home.");
-
+					HomeUtils.addHome(((Player) sender).getUniqueId(), args.length == 1 ? args[0] : "",
+							((Player) sender).getLocation());
 				} else {
 					sender.sendMessage(CoreUtils.prefixes("homes") + "You must be a player to use that command.");
 				}
