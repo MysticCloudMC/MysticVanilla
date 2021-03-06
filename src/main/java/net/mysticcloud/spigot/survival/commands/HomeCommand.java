@@ -47,8 +47,8 @@ public class HomeCommand implements CommandExecutor {
 
 					TeleportUtils.teleport(((Player) sender), home.location(), false, false);
 
-					sender.sendMessage(
-							CoreUtils.prefixes("homes") + "You have teleported to home " + home.name() + ".");
+					sender.sendMessage(CoreUtils.prefixes("homes") + CoreUtils
+							.colorize(VanillaUtils.formatMessage("You have teleported to home &7?&f.", home.name())));
 					if (args.length == 0 && HomeUtils.getHomes(((Player) sender).getUniqueId()).size() >= 2) {
 						String s = "";
 						for (Warp homestr : homes)
@@ -65,8 +65,9 @@ public class HomeCommand implements CommandExecutor {
 						for (Warp ohome : ohomes) {
 							if (ohome.name().equalsIgnoreCase(home)) {
 								((Player) sender).teleport(ohome.location());
-								sender.sendMessage(CoreUtils.prefixes("homes") + VanillaUtils.formatMessage(
-										"You have teleported to &7?&f home &7?&f.", formatUsername(args[0]), ohome.name()));
+								sender.sendMessage(CoreUtils.prefixes("homes")
+										+ VanillaUtils.formatMessage("You have teleported to &7?&f home &7?&f.",
+												formatUsername(args[0]), ohome.name()));
 								return true;
 							}
 						}
