@@ -19,8 +19,8 @@ import org.bukkit.util.Vector;
 import net.mysticcloud.spigot.combatlogger.utils.CombatUtils;
 import net.mysticcloud.spigot.core.utils.CoreUtils;
 import net.mysticcloud.spigot.core.utils.SpawnReason;
+import net.mysticcloud.spigot.core.utils.warps.HomeUtils;
 import net.mysticcloud.spigot.survival.MysticVanilla;
-import net.mysticcloud.spigot.survival.utils.HomeUtils;
 import net.mysticcloud.spigot.survival.utils.VanillaUtils;
 
 public class EntityListener implements Listener {

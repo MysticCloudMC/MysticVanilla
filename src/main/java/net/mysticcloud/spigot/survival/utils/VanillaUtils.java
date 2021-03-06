@@ -44,6 +44,16 @@ public class VanillaUtils {
 		return getVanillaPlayer(CoreUtils.getMysticPlayer(player));
 	}
 
+	public static String formatMessage(String message, String... values) {
+		int i = 0;
+		String string = message;
+		while (string.contains("?")) {
+			string = string.replaceFirst("?", values[i]);
+			i = i + 1;
+		}
+		return string;
+	}
+
 	public static VanillaPlayer getVanillaPlayer(MysticPlayer player) {
 
 		if (vplayers.containsKey(player.getUUID())) {

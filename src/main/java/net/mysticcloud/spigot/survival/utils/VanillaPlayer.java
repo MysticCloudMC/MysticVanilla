@@ -27,7 +27,7 @@ public class VanillaPlayer {
 			}
 		}
 
-		FileConfiguration fc = YamlConfiguration.loadConfiguration(file);
+//		FileConfiguration fc = YamlConfiguration.loadConfiguration(file);
 	}
 
 	public void sendMessage(String key, String message) {

@@ -17,6 +17,7 @@ import net.mysticcloud.spigot.core.utils.warps.Warp;
 import net.mysticcloud.spigot.core.utils.warps.WarpBuilder;
 import net.mysticcloud.spigot.core.utils.warps.WarpUtils;
 import net.mysticcloud.spigot.survival.MysticVanilla;
+import net.mysticcloud.spigot.survival.utils.VanillaUtils;
 
 public class HomeCommand implements CommandExecutor {
 
@@ -64,8 +65,8 @@ public class HomeCommand implements CommandExecutor {
 						for (Warp ohome : ohomes) {
 							if (ohome.name().equalsIgnoreCase(home)) {
 								((Player) sender).teleport(ohome.location());
-								sender.sendMessage(CoreUtils.prefixes("homes") + "You have teleported to "
-										+ formatUsername(args[0]) + " home " + ohome.name() + ".");
+								sender.sendMessage(CoreUtils.prefixes("homes") + VanillaUtils.formatMessage(
+										"You have teleported to ? home ?.", formatUsername(args[0]), ohome.name()));
 								return true;
 							}
 						}
@@ -83,7 +84,7 @@ public class HomeCommand implements CommandExecutor {
 					WarpBuilder warp = new WarpBuilder();
 					if (warp.createWarp().setType("home~" + ((Player) sender).getUniqueId()).setName(name)
 							.setLocation(((Player) sender).getLocation()).getWarp() != null)
-						sender.sendMessage(CoreUtils.prefixes("homes") + "Home (" + name + ") set!");
+						sender.sendMessage(CoreUtils.prefixes("homes") + "Home '" + name + "' set!");
 					else
 						sender.sendMessage(CoreUtils.prefixes("homes") + "There was an error setting you home.");
 
